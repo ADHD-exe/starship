@@ -1,0 +1,190 @@
+add_newline = true
+
+# ================================================================
+# LAYOUT — left always has content, right side has telemetry
+# ================================================================
+
+format = """
+$username\
+$hostname\
+$directory\
+$fill\
+$status\
+$os\
+$battery\
+$time\
+$line_break\
+$character\
+"""
+
+right_format = ""
+
+# ================================================================
+# USERNAME (always shown)
+# ================================================================
+[username]
+style_root = 'red bold'
+format = "[](fg:#73ff9f)[$user]($style)[](bg:#7700ff fg:#73ff9f)"
+style_user = "bg:#73ff9f fg:#050816 bold"
+show_always = true
+
+[hostname]
+format = "[ $hostname]($style)[](bg:#ff9092 fg:#7700ff)"
+style = "bg:#7700ff fg:#050816 bold "
+ssh_only = false
+
+
+# ================================================================
+# DIRECTORY (always shown, full path)
+# ================================================================
+[directory]
+format = "[$path ]($style)[]( fg:#ff9092)"
+style = "bg:#ff9092 fg:#000000 bold"
+truncation_length = 4
+# truncation_symbol = '…/'
+use_logical_path = false
+truncate_to_repo = false
+fish_style_pwd_dir_length = 1
+read_only = " 󰌾"
+home_symbol = "  "
+
+# ================================================================
+# GIT BRANCH (only in repos, closes the blue segment)
+# ================================================================
+[git_branch]
+format = "[ 󰊢 $branch]($style)[](bg:#ff9092 fg:#004cff)"
+style = "bg:#004cff fg:#feffcb bold"
+truncation_length = 20
+truncation_symbol = "…"
+
+# ================================================================
+# GIT STATUS (inline, no background break)
+# ================================================================
+[git_status]
+format = "$ahead$staged$modified$untracked$deleted$renamed$behind[](bg:#004cff fg:#ff9092)"
+style = "fg:#feffcb bg:#004cff bold"
+conflicted = "="
+ahead = "⇡${count}"
+behind = "⇣${count}"
+diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+up_to_date = ""
+untracked = "?${count}"
+staged = "+${count}"
+modified = "~${count}"
+deleted = "-${count}"
+renamed = "»${count}"
+stashed = "s${count}"
+
+# ================================================================
+# COMMAND DURATION
+# ================================================================
+[cmd_duration]
+min_time = 100
+format = "[⏱ ${h}h ${m}m ${s}s]($style)[](bg:#004cff fg:#ff9092)"
+show_milliseconds = true
+disabled = false
+style = "fg:#feffcb bg:#004cff bold"
+
+# ================================================================
+# BATTERY (right side, only when < 80%)
+# ================================================================
+[battery]
+format = "[ $symbol$percentage](bold bg:#5555ff fg:#050816)[](bold bg:#ff55ff fg:#454eff)"
+full_symbol = " "
+[[battery.display]]
+threshold = 10
+style = "bold red"
+discharging_symbol = "🪫 "
+charging_symbol = "⚡"
+[[battery.display]]
+threshold = 30
+style = "bold yellow"
+discharging_symbol = " "
+[[battery.display]]
+threshold = 60
+style = "bold yellow"
+discharging_symbol = " "
+[[battery.display]]
+threshold = 100
+style = "bold green"
+discharging_symbol = ""
+# ================================================================
+# EXIT STATUS (right side, only on failure)
+# ================================================================
+[status]
+disabled = false
+format = "[](bg:none fg:#ff00c8)[✘$status]($style)[](bg:none fg:#ff00c8)"
+style = "bold bg:#ff00c8 fg:#050816"
+pipestatus = true
+symbol = "✘"
+
+# ================================================================
+# OS ICON (right side)
+# ================================================================
+[os]
+format = "[](fg:#00ffd4)[ $symbol ](bold bg:#00ffd4 fg:#050816)[](bg:#454eff fg:#00ffd4)"
+disabled = false
+
+[os.symbols]
+Arch = "󰣇"
+CachyOS = "󰣇"
+NixOS = ""
+Ubuntu = ""
+Fedora = ""
+Debian = ""
+Alpine = ""
+EndeavourOS = ""
+Garuda = ""
+Manjaro = ""
+Pop = ""
+Linux = "󰌽"
+
+# ================================================================
+# TIME (right side, attached to OS segment)
+# ================================================================
+
+[time]
+disabled = false
+format = "[$time](bg:#db57ff fg:#050816 bold)[](fg:#db57ff)"
+time_format = ' %H:%M:%S'
+
+# ================================================================
+# PROMPT CHARACTER
+# ================================================================
+[character]
+success_symbol = "[❯](#00ffd4 bold)"
+error_symbol = "[❯](#ff00c8 bold)"
+
+#Beginnings 
+# Ice Waveform 
+# Flames Thick  
+# Flames Thin 
+# Pixelated big 
+# Pixelated small 
+# hard right 
+# soft right 
+# inverse 
+# circle  
+
+
+#Endings 
+# Ice Waveform 
+# Flames Thick 
+# Flames Thin  
+# Pixelated big 
+# Pixelated small 
+# hard right 
+# soft right 
+# inverse 
+# circle 
+# 
+
+#Angles
+# right 
+# t left 
+# lower left 
+# lover right 
+#upper left 
+# upper right  
+# triangle small down 󱨉
+# triangle small up 󱨊
